@@ -17,16 +17,26 @@
 
 int main()
 {
-   const float mileToKm = 1.6;
-   float milesInput = -1.0;
+   const float MILETOKM = 1.6;
+   float milesInput = 0.0;
 
-   std::cout << "Please, type in the distance in miles: ";
+   std::cout << "Please, type in the distance in miles: \n>>>";
    std::cin >> milesInput;
    std::cout << std::endl;
 
+   // Handle wrong inputs:
+   while (!std::cin.good())
+   {
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+      std::cout << "Wrong input. Please give a number: \n>>>";
+      std::cin >> milesInput;
+   }
+   std::cout << std::endl;
    std::cout << "Here's the distance " << milesInput 
              << " miles in kilometers: " 
-             << std::fixed << std::setprecision(2) << (milesInput * mileToKm) << std::endl;
+             << std::fixed << std::setprecision(2) << (milesInput * MILETOKM) << std::endl;
 
    std::cout << "Bye bye" << std::endl;
 
