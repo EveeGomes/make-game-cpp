@@ -33,39 +33,29 @@ C++ builds upon C, adding features like classes, objects, and templates, making 
 
 While C is considered simpler and easier to learn initially, C++ offers greater power and flexibility for large-scale projects.)""";
 
-   //std::cout << text << std::endl;
-
    std::stringstream ss;
-   
-   // "cout" the entire text into ss. It's a stream of strings :)
-   ss << text;
-
    // Create another string to accept each individual string from ss. That's because ss has all the text string and we can keep on asking for input just
    //  like we do with cin (std::cin >> )
    std::string nextStr = "";
-   /*ss >> nextStr;
-   ss >> nextStr;
-   std::cout << nextStr << std::endl;*/
-
    std::map<const std::string, int> wordCount{};
+
+   // "cout" the entire text into ss. It's a stream of strings :)
+   ss << text;
 
    // So, in order to get the entire text, we can use a while loop. ss >> nextStr stops when that operation returns EOF signaling there's nothing in the
    //  buffer anymore, ie it's empty. That way we'll safely get out of the loop.
    while (ss >> nextStr)
    {
-      /*std::cout << nextStr << std::endl;*/
-
       // We need to get rid of any punctuation like commas and periods, and upper cases as well.
       //  We can loop through each character in nextStr and only accept what's a letter using std::isalpha()
 
       std::string word = "";
-      int lastCharIndex = 0; // in the video he uses 0, but that might cause an issue as he uses lastCharIndex != nextStr.since() - 1
+      int lastCharIndex = 0;
       for (char c : nextStr)
       {
          ++lastCharIndex;
          if (std::isalpha(c) || c == '+')
          {
-            //word.push_back(c);
             // but since we need to get rid of cases, we do as:
             word.push_back(std::tolower(c));
          }
@@ -87,53 +77,45 @@ While C is considered simpler and easier to learn initially, C++ offers greater 
          std::string leftOver = nextStr.substr(lastCharIndex);
          ss << ' ' << leftOver;
       }
+      // To find out which word is being repeated and how many times it's being repeated. 
+      //  We can use a map, where we have the word and a count. That way every time that word appear in the text, we increment the count.
 
+      // Add the word to the map. 
+      //  If the word already exists, it'll increment the int which is the value
       ++wordCount[word];
 
-      ////std::cout << word << std::endl;
-
-      //// To find out which word is being repeated and how many times it's being repeated. 
-      ////  We can use a map, where we have the word and a count. That way every time that word appear in the text, we increment the count.
-
-      //// Add the word as the key and 1 as the count (if the word already exists in the map, it won't be added again)
-      //int count = 1;
-      //wordCount.insert(std::pair<std::string, int>(word, count));
-
-      //// Now check if word already exists in wordCount. If it does, increment count and add to that key (word).
-      ///*
-      //* bug: it only checks one time? all count is 2 when printing them out...
-      //* 
-      //* eg
-      //* word = c++
-      //* 
-      //* 
-      //*/
-
-      //if (word == "c++")
+      //// similar solution presented in the class 20 in section 2:
+      //if (wordCount.find(word) == wordCount.end()) // if the word isn't found in the map, add it with the count = 1
       //{
-      //   std::cout << word << std::endl;
-      //   //std::cout << count << std::endl;
+      //   wordCount.insert({ word, 1 });
       //}
-
-      //if (wordCount.count(word)) // if
+      //else // otherwise, if the word is in the map already, increment the count
       //{
-      //   ++count;
-      //   //std::cout << count << std::endl;
-      //   wordCount[word] = count;
+      //   wordCount[word] += 1;
       //}
-      //std::cout << count << std::endl;
 
    }
 
    // Loop through the map and the words (keys) with a count (value) greater than 1, print it out
    // Range-based for loop
-   for (const auto& pair : wordCount)
+   for (const std::pair<std::string, int>& pair : wordCount) // const auto& pair
    {
       if (pair.second > 1)
       {
          std::cout << "\"" << pair.first << "\" repeated: " << pair.second << " times." << std::endl;
       }
    }
+
+   //std::cout << std::endl;
+   //std::cout << "Using iterator" << std::endl;
+   //// Using iterator
+   //for (std::map<std::string, int>::iterator it = wordCount.begin(); it != wordCount.end(); ++it) // auto it
+   //{
+   //   if (it->second > 1)
+   //   {
+   //      std::cout << "\"" << it->first << "\" repeated: " << it->second << " times." << std::endl;
+   //   }
+   //}
 
    return 0;
 }
