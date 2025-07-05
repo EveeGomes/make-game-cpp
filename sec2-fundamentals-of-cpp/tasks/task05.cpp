@@ -5,15 +5,11 @@
 #include <cstdlib>   // rand(), srand()
 #include <ctime>     // time()
 
-/*
- * 1st: 
- *    generate a bunch of random numbers to work with.
- *    
-*/
 
 int main()
 {
-   const int MAXNUMBERS = 0;
+   const int MAXNUMBERS = 5;
+   int smallest = 0;
    std::vector<int> randomNumbers;
 
    // Seed the random number generator
@@ -31,6 +27,24 @@ int main()
    }
    std::cout << std::endl;
 
+   // Use the bubble sort algorithm - SLOW
+   for (int i = 0; i < randomNumbers.size(); ++i)
+   {
+      // compare the current element with i index agaisnt every element that comes next
+      for (int j = i + 1; j < randomNumbers.size(); ++j)
+      {
+         if (randomNumbers[i] > randomNumbers[j])
+         {
+            std::swap(randomNumbers[i], randomNumbers[j]);
+         }
+      }
+   }
+
+   for (int number : randomNumbers)
+   {
+      std::cout << number << " ";
+   }
+   std::cout << std::endl;
 
    return 0;
 }
