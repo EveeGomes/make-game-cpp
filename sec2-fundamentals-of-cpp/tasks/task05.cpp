@@ -6,7 +6,15 @@
 #include <ctime>     // time()
 #include "task05.h"
 
-// Using merge sort:
+const int MAXNUMBERS = 5;
+
+
+// Quick sort
+// Insertion sort
+
+// Merge sort //
+// Time complexity: O(n log n) - dividing array in halves: log n divisions; each merge step takes linear time (n opetations). 
+// Space complexity: O(n)
 
 // Merge two sorted subarrays into one sorted array
 void merge(std::vector<int>& numbersArray, int left, int mid, int right)
@@ -83,7 +91,9 @@ void mergeSort(std::vector<int>& numbersArray, int left, int right)
       merge(numbersArray, left, mid, right);
    }
 }
+// Merge sort //
 
+// Buble sort //
 // SLOW
 void bubbleSort(std::vector<int>& numbersArray)
 {
@@ -99,6 +109,7 @@ void bubbleSort(std::vector<int>& numbersArray)
       }
    }
 }
+// Buble sort //
 
 void printArray(std::vector<int>& numbersArray)
 {
@@ -109,23 +120,25 @@ void printArray(std::vector<int>& numbersArray)
    std::cout << std::endl;
 }
 
-int main()
+void generateRandomNumbers(std::vector<int>& numbersArray, int amountOfNumbers)
 {
-   const int MAXNUMBERS = 5;
-   int smallest = 0;
-   std::vector<int> randomNumbers;
-
    // Seed the random number generator
    std::srand(std::time(nullptr));
 
-   for (int i = 0; i < MAXNUMBERS; ++i)
+   for (int i = 0; i < amountOfNumbers; ++i)
    {
       // Generate a number between 1 and 100
       int randomNum = std::rand() % 100 + 1;
 
       // Add to randomNumbers vector
-      randomNumbers.push_back(randomNum);
+      numbersArray.push_back(randomNum);
    }
+}
+
+int main()
+{
+   std::vector<int> randomNumbers;
+   generateRandomNumbers(randomNumbers, MAXNUMBERS);
    printArray(randomNumbers);
    std::cout << std::endl;
 
