@@ -8,9 +8,9 @@
 
 const int MAXNUMBERS = 5;
 
-
 // Quick sort
 // Insertion sort
+
 
 // Merge sort //
 // Time complexity: O(n log n) - dividing array in halves: log n divisions; each merge step takes linear time (n opetations). 
@@ -111,7 +111,7 @@ void bubbleSort(std::vector<int>& numbersArray)
 }
 // Buble sort //
 
-void printArray(std::vector<int>& numbersArray)
+void printArray(const std::vector<int>& numbersArray)
 {
    for (int number : numbersArray)
    {
@@ -144,7 +144,6 @@ int main()
 
    //bubbleSort(randomNumbers);
    mergeSort(randomNumbers, 0, randomNumbers.size() - 1);
-
    printArray(randomNumbers);
 
    return 0;
