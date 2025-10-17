@@ -12,4 +12,6 @@ set(CMAKE_CXX_EXTENSIONS		OFF)
 # Creates a variable (NAME value). To use it: ${NAME}
 set(LIGHT_YEARS_GAME_TARGET_NAME LightYearsGame)
 
+# The following subdir holds the source files used for this project.
+# If more projects are needed/created in the future, then simply create another subdir and add another CmakeLists that holds what's needed for that project!
 add_subdirectory(LightYears)

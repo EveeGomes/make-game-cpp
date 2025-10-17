@@ -10,6 +10,9 @@ ipch/
 x64/
 .vs/
 
+# LightYears
+LightYears/build/
+
 #tempfiles
 ~$_*.*
 

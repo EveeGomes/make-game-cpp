@@ -4,7 +4,6 @@
 #include <vector>
 #include <cstdlib>   // rand(), srand()
 #include <ctime>     // time()
-#include "task05.h"
 
 const int MAXNUMBERS = 5;
 
@@ -112,11 +111,11 @@ void bubbleSort(std::vector<int>& numbersArray)
 // Buble sort //
 
 template<typename T>
-void printArray(const T& numbersArray)
+void printArray(const std::vector<T>& vectorToPrint)
 {
-   for (int number : numbersArray)
+   for (T element : vectorToPrint)
    {
-      std::cout << number << " ";
+      std::cout << element << " ";
    }
    std::cout << std::endl;
 }
@@ -140,12 +139,14 @@ int main()
 {
    std::vector<int> randomNumbers;
    generateRandomNumbers(randomNumbers, MAXNUMBERS);
-   printArray<std::vector<int>>(randomNumbers);
-   std::cout << std::endl;
+   printArray<int>(randomNumbers);
+   //std::cout << std::endl;
 
    //bubbleSort(randomNumbers);
    mergeSort(randomNumbers, 0, randomNumbers.size() - 1);
-   printArray<std::vector<int>>(randomNumbers);
+   printArray<int>(randomNumbers);
+   std::cout << std::endl;
+   printArray<std::string>(std::vector<std::string>{"mavi", "alex"});
 
    return 0;
 }

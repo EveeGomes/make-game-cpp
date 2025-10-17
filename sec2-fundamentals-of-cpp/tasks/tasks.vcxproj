@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="task05.cpp" />
+    <ClCompile Include="..\template.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="task05.h" />
