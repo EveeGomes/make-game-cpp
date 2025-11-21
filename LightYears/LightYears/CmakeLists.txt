@@ -1,3 +1,20 @@
-add_executable(${LIGHT_YEARS_GAME_TARGET_NAME}
+add_executable(
+	${LIGHT_YEARS_GAME_TARGET_NAME}
 	${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
+)
+
+# Make sure to link the LightYears project to SFML libraries. It makes the project dependent on those libraries.
+target_link_libraries(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC sfml-graphics)
+target_link_libraries(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC sfml-window)
+target_link_libraries(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC sfml-system)
+target_link_libraries(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC sfml-audio)
+
+# Add command to the post build event
+add_custom_command(
+	TARGET ${LIGHT_YEARS_GAME_TARGET_NAME}
+	POST_BUILD
+	COMMAND
+	${CMAKE_COMMAND} -E copy_if_different
+	$<TARGET_FILE:sfml-window>
+	$<TARGET_FILE_DIR:${LIGHT_YEARS_GAME_TARGET_NAME}>
 )
