@@ -9,12 +9,22 @@ target_link_libraries(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC sfml-window)
 target_link_libraries(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC sfml-system)
 target_link_libraries(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC sfml-audio)
 
-# Add command to the post build event
-add_custom_command(
-	TARGET ${LIGHT_YEARS_GAME_TARGET_NAME}
-	POST_BUILD
-	COMMAND
-	${CMAKE_COMMAND} -E copy_if_different
-	$<TARGET_FILE:sfml-window>
-	$<TARGET_FILE_DIR:${LIGHT_YEARS_GAME_TARGET_NAME}>
-)
+# Create a function that copies the SFML DLLs to the target output directory after building.
+#   function (FunctionName ARG1 ARG2)
+function(CopyLibToTarget LIB_NAME TARGET_NAME)
+	# Add command to the post build event
+	add_custom_command(
+		TARGET ${TARGET_NAME}
+		POST_BUILD
+		COMMAND
+		${CMAKE_COMMAND} -E copy_if_different
+		$<TARGET_FILE:${LIB_NAME}>
+		$<TARGET_FILE_DIR:${TARGET_NAME}>
+	)	
+endfunction()
+
+# Copy the SFML DLLs to the output directory of the LightYearsGame target.
+CopyLibToTarget(sfml-graphics ${LIGHT_YEARS_GAME_TARGET_NAME})
+CopyLibToTarget(sfml-window ${LIGHT_YEARS_GAME_TARGET_NAME})
+CopyLibToTarget(sfml-system ${LIGHT_YEARS_GAME_TARGET_NAME})
+CopyLibToTarget(sfml-audio ${LIGHT_YEARS_GAME_TARGET_NAME})
